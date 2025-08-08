@@ -21,7 +21,7 @@ A real-time voice assistant combining MLX Whisper transcription with speaker rec
 2. **Configure**
    ```bash
    cp .env.example .env
-   # Add your ANTHROPIC_API_KEY to .env
+   # Add your ANTHROPIC_API_KEY and HF_TOKEN to .env
    ```
 
 3. **Run**
@@ -100,12 +100,21 @@ response = assistant.get_ai_response("Hello!", speaker_id="#user123")
 
 ## Configuration
 
-**Required:** `ANTHROPIC_API_KEY` in `.env`
+**Required API Keys:**
+- `ANTHROPIC_API_KEY` - Get from [Anthropic Console](https://console.anthropic.com)
+- `HF_TOKEN` - Get from [HuggingFace Settings](https://huggingface.co/settings/tokens) (needed for PyAnnote speaker recognition)
 
 **Optional:**
 - `HONCHO_API_KEY` - For conversation memory
 - `SPEAKER_THRESHOLD=0.52` - Speaker matching sensitivity
 - `HARSH_ENV_MODE=false` - Harsh environment mode
+
+### Getting HuggingFace Token
+1. Go to [huggingface.co/settings/tokens](https://huggingface.co/settings/tokens)
+2. Click "New token" 
+3. Name it (e.g., "speaker-recognition")
+4. Select "Read" role
+5. Copy token to `.env` as `HF_TOKEN=hf_your_token_here`
 
 ## Files
 
