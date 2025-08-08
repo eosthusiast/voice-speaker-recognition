@@ -1,8 +1,8 @@
 """
-Speaker Recognition Module for SAN Voice Interface
+Speaker Recognition Module for Voice Interface
 
 This module provides speaker identification capabilities using pyannote/embedding
-to recognize returning speakers within a single session at Burning Man.
+to recognize returning speakers within a conversation session.
 """
 
 import os
