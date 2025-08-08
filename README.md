@@ -86,7 +86,26 @@ pip install whisperx
 # Includes speaker diarization, good for multi-speaker scenarios
 ```
 
-## Basic Usage
+## Speaker Recognition Only
+
+If you only need speaker recognition without the voice assistant:
+
+```python
+from speaker_recognition import initialize_speaker_recognition, identify_speaker
+
+# One-time setup
+initialize_speaker_recognition()
+
+# Identify speaker from audio file
+speaker_id, confidence = identify_speaker("path/to/audio.wav")
+
+if speaker_id:
+    print(f"Recognized speaker: {speaker_id} (confidence: {confidence:.3f})")
+else:
+    print("New speaker - will be assigned ID on next interaction")
+```
+
+## Full Voice Assistant Usage
 
 ```python
 from voice_assistant import VoiceAssistant
@@ -116,11 +135,82 @@ response = assistant.get_ai_response("Hello!", speaker_id="#user123")
 4. Select "Read" role
 5. Copy token to `.env` as `HF_TOKEN=hf_your_token_here`
 
+## API Reference
+
+### Speaker Recognition Functions
+
+```python
+# Initialize the system (call once)
+initialize_speaker_recognition(hf_token=None) -> bool
+
+# Identify speaker from audio file  
+identify_speaker(audio_path, threshold=0.52) -> Tuple[Optional[str], float]
+
+# Get session statistics
+get_session_stats() -> Dict[str, int]
+```
+
+### Audio Requirements
+
+- **Formats**: WAV, MP3, M4A, FLAC
+- **Sample Rate**: Any (auto-converted to 16kHz internally)
+- **Channels**: Mono or Stereo (converted to mono)
+- **Duration**: Minimum 1.5 seconds recommended
+- **Quality**: Higher quality = better recognition
+
+### Speaker IDs
+
+- **Format**: 4-character hashtags (e.g., `#je7m`, `#3n6v`)
+- **Generation**: Automatic on first detection
+- **Persistence**: Saved to `speaker_hashtags.txt`
+- **Confidence**: Lower values = higher confidence (cosine distance)
+
+### Thresholds
+
+- **Default**: 0.52 (balanced accuracy/new speaker detection)
+- **Strict**: 0.35 (fewer false matches, more new speakers)
+- **Lenient**: 0.70 (more matches, risk of false positives)
+
+## Integration Examples
+
+### Minimal Setup (Speaker Recognition Only)
+
+```python
+# Install minimal dependencies
+pip install pyannote-audio numpy scipy
+
+# Basic usage
+from speaker_recognition import initialize_speaker_recognition, identify_speaker
+
+initialize_speaker_recognition()
+speaker_id, confidence = identify_speaker("audio.wav")
+```
+
+### Batch Processing
+
+```python
+results = []
+for audio_file in audio_files:
+    speaker_id, confidence = identify_speaker(audio_file)
+    results.append({'file': audio_file, 'speaker': speaker_id, 'confidence': confidence})
+```
+
+### Pipeline Integration
+
+```python
+def add_speaker_recognition(audio_file, existing_results):
+    speaker_id, confidence = identify_speaker(audio_file)
+    existing_results['speaker'] = {'id': speaker_id, 'confidence': confidence}
+    return existing_results
+```
+
 ## Files
 
-- `voice_assistant.py` - Main application with PTT
-- `speaker_recognition.py` - Voice fingerprinting  
-- `examples/basic_usage.py` - Integration examples
+- `voice_assistant.py` - Full voice assistant with PTT
+- `speaker_recognition.py` - Core speaker recognition module
+- `examples/basic_usage.py` - Full system examples  
+- `examples/speaker_only.py` - Minimal speaker recognition example
+- `examples/integration_patterns.py` - Common integration patterns
 
 ## License
 
