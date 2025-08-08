@@ -26,7 +26,7 @@ A real-time voice assistant combining MLX Whisper transcription with speaker rec
 
 3. **Run**
    ```bash
-   uv run python voice_assistant.py
+   uv run voice_assistant.py
    # Hold Option+Space, speak, release to get AI response
    ```
 
@@ -35,7 +35,7 @@ A real-time voice assistant combining MLX Whisper transcription with speaker rec
 **With uv (fastest, recommended):**
 ```bash
 uv sync
-uv run python voice_assistant.py
+uv run voice_assistant.py
 ```
 
 **With pip:**
