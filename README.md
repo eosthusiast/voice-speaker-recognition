@@ -5,8 +5,8 @@ A real-time voice assistant combining MLX Whisper transcription with speaker rec
 ## What It Does
 
 - **Voice Input**: Push-to-talk interface (Option+Space) for hands-free interaction
-- **Speaker ID**: Recognizes returning speakers using voice fingerprints 
-- **Fast Transcription**: MLX Whisper optimized for Apple Silicon (M1/M2/M3)
+- **Speaker ID**: Recognizes returning speakers using [PyAnnote embeddings](https://huggingface.co/pyannote/embedding) - the core voice fingerprinting component
+- **Fast Transcription**: MLX Whisper optimized for Apple Silicon (M1/M2/M3/M4)
 - **AI Chat**: Anthropic Claude integration with speaker-aware context
 - **Memory**: Optional conversation persistence via Honcho
 
@@ -51,7 +51,7 @@ pip install -r requirements.txt
 ## Platform Compatibility
 
 ### MLX Whisper (Apple Silicon Only)
-This project uses **MLX Whisper Large-v3-Turbo** for multilingual support and language auto-detection on Apple Silicon (M1/M2/M3). **MLX only runs on macOS**.
+This project uses **MLX Whisper Large-v3-Turbo** for multilingual support and language auto-detection on Apple Silicon (M1/M2/M3/M4). **MLX only runs on macOS**.
 
 **For English-only and faster performance:**
 ```python
@@ -120,6 +120,7 @@ MIT License - see LICENSE file for details.
 ## Acknowledgments
 
 - [MLX Whisper](https://github.com/ml-explore/mlx-examples/tree/main/whisper) - Fast transcription on Apple Silicon
-- [PyAnnote Audio](https://github.com/pyannote/pyannote-audio) - Speaker voice embeddings
+- [PyAnnote Embedding](https://huggingface.co/pyannote/embedding) - Core speaker voice embeddings model
+- [PyAnnote Audio](https://github.com/pyannote/pyannote-audio) - Speaker recognition toolkit
 - [Anthropic Claude](https://anthropic.com) - AI conversation
 - [Honcho](https://honcho.dev) - Memory management
