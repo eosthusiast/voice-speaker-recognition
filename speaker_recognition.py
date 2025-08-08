@@ -38,13 +38,13 @@ MIN_INTERACTIONS_BEFORE_MERGE = int(os.getenv('MIN_INTERACTIONS_BEFORE_MERGE', '
 RECENT_SPEAKER_BONUS = float(os.getenv('RECENT_SPEAKER_BONUS', '0.10'))  # Distance bonus for speakers who spoke recently (doubled)
 RECENT_TIME_WINDOW = float(os.getenv('RECENT_TIME_WINDOW', '60.0'))  # Seconds to consider a speaker "recent" (doubled)
 
-# Burning Man mode - harsh environment settings
-BURNING_MAN_MODE = os.getenv('BURNING_MAN_MODE', 'false').lower() in ['true', '1', 'yes']
+# Harsh environment mode - adjusts thresholds for noisy conditions
+HARSH_ENV_MODE = os.getenv('HARSH_ENV_MODE', 'false').lower() in ['true', '1', 'yes']
 
-if BURNING_MAN_MODE:
-    print(f"{Colors.YELLOW}🔥 BURNING MAN MODE ACTIVATED 🔥{Colors.RESET}")
-    # Override settings for harsh desert environment
-    DEFAULT_SIMILARITY_THRESHOLD = float(os.getenv('SPEAKER_THRESHOLD', '0.60'))  # More lenient for dust/noise (increased)
+if HARSH_ENV_MODE:
+    print(f"{Colors.YELLOW}🔊 HARSH ENVIRONMENT MODE ACTIVATED 🔊{Colors.RESET}")
+    # Override settings for noisy environments
+    DEFAULT_SIMILARITY_THRESHOLD = float(os.getenv('SPEAKER_THRESHOLD', '0.60'))  # More lenient for noise (increased)
     MERGE_SIMILARITY_THRESHOLD = float(os.getenv('MERGE_THRESHOLD', '0.55'))  # More lenient merging (increased)
     RECENT_SPEAKER_BONUS = float(os.getenv('RECENT_SPEAKER_BONUS', '0.15'))  # Higher bonus for continuity (increased)
     RECENT_TIME_WINDOW = float(os.getenv('RECENT_TIME_WINDOW', '90.0'))  # Longer window (increased)

@@ -15,9 +15,7 @@ A real-time voice assistant combining MLX Whisper transcription with speaker rec
 1. **Install (recommended - uv)**
    ```bash
    # Install uv if needed: curl -LsSf https://astral.sh/uv/install.sh | sh
-   uv venv
-   source .venv/bin/activate  # or .venv\Scripts\activate on Windows
-   uv pip install -e .
+   uv sync
    ```
 
 2. **Configure**
@@ -28,7 +26,7 @@ A real-time voice assistant combining MLX Whisper transcription with speaker rec
 
 3. **Run**
    ```bash
-   python voice_assistant.py
+   uv run python voice_assistant.py
    # Hold Option+Space, speak, release to get AI response
    ```
 
@@ -36,8 +34,8 @@ A real-time voice assistant combining MLX Whisper transcription with speaker rec
 
 **With uv (fastest, recommended):**
 ```bash
-uv venv && source .venv/bin/activate
-uv pip install -e .
+uv sync
+uv run python voice_assistant.py
 ```
 
 **With pip:**
@@ -107,7 +105,7 @@ response = assistant.get_ai_response("Hello!", speaker_id="#user123")
 **Optional:**
 - `HONCHO_API_KEY` - For conversation memory
 - `SPEAKER_THRESHOLD=0.52` - Speaker matching sensitivity
-- `BURNING_MAN_MODE=false` - Harsh environment mode
+- `HARSH_ENV_MODE=false` - Harsh environment mode
 
 ## Files
 
